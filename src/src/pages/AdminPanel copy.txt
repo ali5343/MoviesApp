@@ -1,0 +1,1454 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+    FaYoutube,
+    FaSearch,
+    FaBell,
+    FaUserCircle,
+    FaVideo,
+    FaChartBar,
+    FaTachometerAlt,
+    FaFileUpload,
+    FaListUl,
+    FaBullhorn, // Advertisement icon
+    FaEye, // Using eye icon for Impressions
+    FaTrashAlt, // Icon for removing items
+    FaEdit, // Icon for editing items
+    FaPlusCircle // Icon for adding items
+} from 'react-icons/fa'; // Install react-icons: npm install react-icons
+
+const AdminPanel = ({ onLogout }) => {
+    // Initialize playlists state here so it can be passed down
+    const [playlists, setPlaylists] = useState([
+        // Initial dummy playlists/series - Keep this data here
+        {
+            id: 1,
+            title: "Beginner Web Development",
+            description: "Learn the basics of HTML, CSS, and JavaScript.",
+            keywords: "web development, frontend, html, css, javascript",
+            thumbnail: "https://via.placeholder.com/150x90/ff7f50/ffffff?text=Web+Dev",
+            region: "English",
+            videos: [
+                { id: 101, title: "HTML Introduction", description: "First video", keywords: "html", videoFile: null },
+                { id: 102, title: "CSS Basics", description: "Second video", keywords: "css", videoFile: null },
+            ],
+        },
+        {
+            id: 2,
+            title: "Advanced React Techniques",
+            description: "Dive deep into React hooks and context.",
+            keywords: "react, frontend, javascript, hooks, context",
+            thumbnail: "https://via.placeholder.com/150x90/6495ed/ffffff?text=React",
+            region: "English",
+            videos: [
+                { id: 201, title: "Understanding Hooks", description: "Part 1", keywords: "react hooks", videoFile: null },
+            ],
+        },
+         {
+            id: 3,
+            title: "Learn Mandarin Chinese",
+            description: "A series for learning Mandarin.",
+            keywords: "chinese, language, mandarin",
+            thumbnail: "https://via.placeholder.com/150x90/90ee90/000000?text=Mandarin",
+            region: "Chinese",
+            videos: [],
+        },
+         {
+            id: 4,
+            title: "Exploring Myanmar Culture",
+            description: "A series about the culture of Myanmar.",
+            keywords: "myanmar, culture, travel",
+            thumbnail: "https://via.placeholder.com/150x90/ffb6c1/000000?text=Myanmar",
+            region: "Myanmar",
+            videos: [],
+        },
+    ]);
+
+    // State for channel group links and impressions
+    const [channelGroups, setChannelGroups] = useState([
+        { id: 1, region: 'English', type: 'Telegram', link: 'https://t.me/english_group', clicks: 150 },
+        { id: 2, region: 'English', type: 'WhatsApp', link: 'https://wa.me/english_group', clicks: 120 },
+        { id: 3, region: 'Chinese', type: 'WeChat', link: 'weixin://dl/chat?chinese_group', clicks: 300 },
+        { id: 4, region: 'Chinese', type: 'Weibo', link: 'https://weibo.com/chinese_group', clicks: 250 },
+        { id: 5, region: 'Myanmar', type: 'Telegram', link: 'https://t.me/myanmar_group', clicks: 80 },
+        { id: 6, region: 'Indonesian', type: 'WhatsApp', link: 'https://wa.me/indonesian_group', clicks: 100 },
+        // Add more dummy data for other regions as needed
+    ]);
+
+
+    const [activeSection, setActiveSection] = useState('dashboard');
+    const navigate = useNavigate();
+
+    const handleSectionClick = (section) => {
+        setActiveSection(section);
+    };
+
+    const handleLogoutClick = () => {
+        onLogout();
+        navigate('/');
+    };
+
+    return (
+        <div className="flex flex-col h-screen bg-gray-900 text-white">
+            {/* Top Navigation Bar */}
+            <div className="bg-gray-800 h-16 flex items-center justify-between px-6 shadow-md">
+                <div className="flex items-center">
+                    <FaYoutube className="text-2xl mr-4 text-red-600" />
+                    <span className="text-xl font-bold mr-4">My Studio</span>
+                    <div className="relative hidden md:block">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="bg-gray-700 px-4 pl-10 py-2 rounded-full text-white focus:outline-none focus:ring-1 focus:ring-blue-500 w-64"
+                        />
+                        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                    <FaVideo className="text-xl hover:text-gray-300 cursor-pointer" />
+                    <FaBell className="text-xl hover:text-gray-300 cursor-pointer" />
+                    <FaUserCircle className="text-2xl hover:text-gray-300 cursor-pointer" />
+                    <button
+                        onClick={handleLogoutClick}
+                        className="ml-4 px-4 py-2 bg-red-600 rounded hover:bg-red-700 transition duration-200 ease-in-out"
+                    >
+                        Logout
+                    </button>
+                </div>
+            </div>
+
+            <div className="flex flex-1 overflow-hidden">
+                {/* Sidebar */}
+                <div className="w-64 bg-gray-800 py-6 px-4 flex-shrink-0 overflow-y-auto">
+                    <ul className="space-y-2">
+                        <SidebarItem
+                            icon={<FaTachometerAlt />}
+                            text="Dashboard"
+                            isActive={activeSection === 'dashboard'}
+                            onClick={() => handleSectionClick('dashboard')}
+                        />
+                        <SidebarItem
+                            icon={<FaVideo />}
+                            text="Content"
+                            isActive={activeSection === 'content'}
+                            onClick={() => handleSectionClick('content')}
+                        />
+                        <SidebarItem
+                            icon={<FaChartBar />}
+                            text="Analytics"
+                            isActive={activeSection === 'analytics'}
+                            onClick={() => handleSectionClick('analytics')}
+                        />
+                        {/* Added Advertisement sidebar item */}
+                        <SidebarItem
+                            icon={<FaBullhorn />}
+                            text="Advertisement"
+                            isActive={activeSection === 'advertisement'}
+                            onClick={() => handleSectionClick('advertisement')}
+                        />
+                        {/* Impressions sidebar item */}
+                        <SidebarItem
+                            icon={<FaEye />}
+                            text="Impressions"
+                            isActive={activeSection === 'impressions'}
+                            onClick={() => handleSectionClick('impressions')}
+                        />
+                         {/* Settings sidebar item (removed) */}
+                    </ul>
+                </div>
+
+                {/* Main Content */}
+                <div className="flex-1 py-6 px-8 overflow-y-auto">
+                    {activeSection === 'dashboard' && <DashboardContent />}
+                    {/* Pass setPlaylists down to ContentManagementContent */}
+                    {activeSection === 'content' && <ContentManagementContent playlists={playlists} setPlaylists={setPlaylists} />}
+                    {activeSection === 'analytics' && <AnalyticsContent />}
+                    {/* Render AdvertisementContent */}
+                    {activeSection === 'advertisement' && <AdvertisementContent playlists={playlists} />}
+                     {/* Render ChannelImpressionsContent and pass channelGroups and setChannelGroups */}
+                    {activeSection === 'impressions' && <ChannelImpressionsContent channelGroups={channelGroups} setChannelGroups={setChannelGroups} />}
+                    {/* SettingsContent is removed */}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const SidebarItem = ({ icon, text, isActive, onClick }) => (
+    <li
+        className={`flex items-center py-3 px-4 rounded-md transition duration-200 ease-in-out cursor-pointer ${isActive ? 'bg-gray-700 text-blue-400' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
+        onClick={onClick}
+    >
+        {icon && <span className="mr-3 text-xl">{icon}</span>}
+        <span className="text-sm font-medium">{text}</span>
+    </li>
+);
+
+// --- DashboardContent Component (remains the same) ---
+const DashboardContent = () => {
+    const [activeRegionFilter, setActiveRegionFilter] = useState('All');
+
+    const dashboardStats = [
+        { title: "Total Views", value: "1.2M" },
+        { title: "Likes", value: "100K" },
+        { title: "Watch Time (Hours)", value: "4.5K" },
+        { title: "Total Series", value: "50" },
+    ];
+
+    const recentVideos = [
+        { id: 1, title: "Exploring the Great Wall", views: "10,000", likes: "900", region: "Chinese" },
+        { id: 2, title: "React Hooks Tutorial", views: "5,000", likes: "450", region: "English" },
+        { id: 3, title: "Travel Guide to Bagan", views: "8,000", likes: "700", region: "Myanmar" },
+        { id: 4, title: "Indonesian Cooking Class", views: "12,000", likes: "1100", region: "Indonesian" },
+        { id: 5, title: "Street Food in Hanoi", views: "7,500", likes: "600", region: "Vietnamese" },
+        { id: 6, title: "Dhaka City Tour", views: "9,000", likes: "850", region: "Bangladeshi" },
+        { id: 7, title: "Deep Sea Diving", views: "3,000", likes: "200", region: "Others" },
+        { id: 8, title: "Advanced CSS Techniques", views: "6,000", likes: "550", region: "English" },
+        { id: 9, title: "Chinese Cuisine Basics", views: "15,000", likes: "1300", region: "Chinese" },
+        { id: 10, title: "Understanding JavaScript Closures", views: "7,000", likes: "650", region: "English" },
+    ];
+
+    const mostWatchedSeriesData = [
+        { id: 1, title: "Coding Fundamentals", totalWatchTime: "500 Hours", totalEpisodes: 25, region: "English" },
+        { id: 2, title: "Advanced React Patterns", totalWatchTime: "300 Hours", totalEpisodes: 15, region: "English" },
+        { id: 3, title: "Tailwind CSS Mastery", totalWatchTime: "200 Hours", totalEpisodes: 10, region: "English" },
+        { id: 4, title: "Exploring Southeast Asia", totalWatchTime: "400 Hours", totalEpisodes: 20, region: "Others" },
+        { id: 5, title: "Beginner's Guide to Python", totalWatchTime: "150 Hours", totalEpisodes: 12, region: "Educational" },
+        { id: 6, title: "The Art of Photography", totalWatchTime: "100 Hours", totalEpisodes: 8, region: "Others" },
+        { id: 7, title: "Vietnamese Street Food Secrets", totalWatchTime: "250 Hours", totalEpisodes: 18, region: "Vietnamese" },
+         { id: 8, title: "Myanmar History Explained", totalWatchTime: "180 Hours", totalEpisodes: 10, region: "Myanmar" },
+    ];
+
+    const filteredVideos = activeRegionFilter === 'All'
+        ? recentVideos
+        : recentVideos.filter(video => video.region === activeRegionFilter);
+
+    const filteredSeries = activeRegionFilter === 'All'
+        ? mostWatchedSeriesData
+        : mostWatchedSeriesData.filter(series => series.region === activeRegionFilter);
+
+    const regions = ['All', 'Chinese', 'English', 'Myanmar', 'Indonesian', 'Vietnamese', 'Bangladeshi', 'Others'];
+
+    return (
+        <div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-200">Dashboard</h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {dashboardStats.map((stat, index) => (
+                    <DashboardCard key={index} title={stat.title} value={stat.value} />
+                ))}
+            </div>
+
+             <div className="bg-gray-800 rounded-lg p-4 shadow-lg mb-8 flex items-center justify-between">
+                 <h3 className="text-xl font-semibold text-gray-200">Content Overview</h3>
+                 <div>
+                    <label htmlFor="regionFilter" className="mr-2 text-gray-300 text-sm font-medium">
+                        Filter by Region:
+                    </label>
+                    <select
+                        id="regionFilter"
+                        value={activeRegionFilter}
+                        onChange={(e) => setActiveRegionFilter(e.target.value)}
+                        className="bg-gray-700 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    >
+                        {regions.map(region => (
+                            <option key={region} value={region}>{region}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+
+            <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
+                <h3 className="text-xl font-semibold text-gray-200 mb-4">Recent Videos</h3>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr className="bg-gray-700">
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-md">Title</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Views</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Likes</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-md">Region</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-700">
+                            {filteredVideos.length > 0 ? (
+                                filteredVideos.map(video => (
+                                    <tr key={video.id} className="hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{video.title}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.views}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.likes}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.region}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="px-4 py-4 text-center text-gray-400">No videos found for the selected region.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+             <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
+                <h3 className="text-xl font-semibold text-gray-200 mb-4">Most Watched Series</h3>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr className="bg-gray-700">
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-md">Title</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total Watch Time</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total Episodes</th>
+                                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-md">Region</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-700">
+                            {filteredSeries.length > 0 ? (
+                                filteredSeries.map(series => (
+                                    <tr key={series.id} className="hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{series.title}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{series.totalWatchTime}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{series.totalEpisodes}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{series.region}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="px-4 py-4 text-center text-gray-400">No series found for the selected region.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const DashboardCard = ({ title, value }) => (
+    <div className="bg-gray-800 rounded-lg p-5 shadow-lg border border-gray-700">
+        <h4 className="text-sm font-medium text-gray-400 mb-2">{title}</h4>
+        <p className="text-3xl font-bold text-white">{value}</p>
+    </div>
+);
+
+const AnalyticsContent = () => {
+    const [activeAnalyticsRegionFilter, setActiveAnalyticsRegionFilter] = useState('All');
+
+     const regionalAnalyticsData = [
+        { region: "All", views: "1.2M", watchTime: "4.5K hrs", subscribers: "+50K", avgDuration: "5:30" },
+        { region: "Chinese", views: "300K", watchTime: "1K hrs", subscribers: "+10K", avgDuration: "6:15" },
+        { region: "English", views: "600K", watchTime: "2K hrs", subscribers: "+25K", avgDuration: "4:50" },
+        { region: "Myanmar", views: "100K", watchTime: "500 hrs", subscribers: "+5K", avgDuration: "5:00" },
+        { region: "Indonesian", views: "80K", watchTime: "400 hrs", subscribers: "+4K", avgDuration: "5:10" },
+        { region: "Vietnamese", views: "70K", watchTime: "350 hrs", subscribers: "+3K", avgDuration: "5:05" },
+        { region: "Bangladeshi", views: "50K", watchTime: "200 hrs", subscribers: "+2K", avgDuration: "4:40" },
+        { region: "Others", views: "100K", watchTime: "550 hrs", subscribers: "+1K", avgDuration: "5:45" },
+    ];
+
+    const topVideosData = [
+        { title: "Chinese Cuisine Basics", region: "Chinese", views: "15,000", likes: "1,300" },
+        { title: "Advanced React Techniques", region: "English", views: "6,000", likes: "550" },
+        { title: "Travel Guide to Bagan", region: "Myanmar", views: "8,000", likes: "700" },
+        { title: "Indonesian Cooking Class", region: "Indonesian", views: "12,000", likes: "1,100" },
+        { title: "Street Food in Hanoi", region: "Vietnamese", views: "7,500", likes: "600" },
+         { title: "Dhaka City Tour", region: "Bangladeshi", views: "9,000", likes: "850" },
+        { title: "Exploring the Great Wall", region: "Chinese", views: "10,000", likes: "900" },
+        { title: "Deep Sea Diving", views: "3,000", likes: "200", region: "Others" },
+    ];
+
+    const audienceRetentionData = [
+        { time: "0:00", retention: "100%" },
+        { time: "0:30", retention: "85%" },
+        { time: "1:00", retention: "70%" },
+        { time: "2:00", retention: "55%" },
+        { time: "3:00", retention: "40%" },
+        { time: "5:00", retention: "25%" },
+        { time: "7:00", retention: "15%" },
+        { time: "10:00", retention: "10%" },
+    ];
+
+
+     const regions = ['All', 'Chinese', 'English', 'Myanmar', 'Indonesian', 'Vietnamese', 'Bangladeshi', 'Others'];
+
+     const handleAnalyticsRegionFilterChange = (event) => {
+        setActiveAnalyticsRegionFilter(event.target.value);
+    };
+
+    const filteredRegionalSummary = activeAnalyticsRegionFilter === 'All'
+        ? regionalAnalyticsData.filter(data => data.region === 'All')
+        : regionalAnalyticsData.filter(data => data.region === activeAnalyticsRegionFilter);
+
+
+    const filteredTopVideos = activeAnalyticsRegionFilter === 'All'
+        ? topVideosData
+        : topVideosData.filter(video => video.region === activeAnalyticsRegionFilter);
+
+
+    return (
+        <div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-200">Analytics</h2>
+
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+                <h3 className="text-xl font-semibold text-gray-200">Channel Performance</h3>
+                <div>
+                    <label htmlFor="analyticsRegionFilter" className="mr-2 text-gray-300 text-sm font-medium">
+                        Filter by Region:
+                    </label>
+                    <select
+                        id="analyticsRegionFilter"
+                        value={activeAnalyticsRegionFilter}
+                        onChange={handleAnalyticsRegionFilterChange}
+                        className="bg-gray-700 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    >
+                        {regions.map(region => (
+                            <option key={region} value={region}>{region}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+             <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
+                <h4 className="text-lg font-semibold text-gray-200 mb-4">Summary by Region</h4>
+                 <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr className="bg-gray-700">
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-md">Region</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Views</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Watch Time</th>
+                                {/* <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Subscribers</th> */}
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-md">Avg. Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-700">
+                            {filteredRegionalSummary.length > 0 ? (
+                                filteredRegionalSummary.map(data => (
+                                     <tr key={data.region} className="hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{data.region}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{data.views}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{data.watchTime}</td>
+                                        {/* <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{data.subscribers}</td> */}
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{data.avgDuration}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5" className="px-4 py-4 text-center text-gray-400">No regional data available for this filter.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+
+             {/* Top Performing Videos Section */}
+             <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
+                <h4 className="text-lg font-semibold text-gray-200 mb-4">Top Performing Videos {activeAnalyticsRegionFilter !== 'All' && `in ${activeAnalyticsRegionFilter}`}</h4>
+                 <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr className="bg-gray-700">
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-md">Title</th>
+                                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Region</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Views</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-md">Likes</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-700">
+                            {filteredTopVideos.length > 0 ? (
+                                filteredTopVideos.map((video, index) => (
+                                     <tr key={index} className="hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{video.title}</td>
+                                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.region}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.views}</td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.likes}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="px-4 py-4 text-center text-gray-400">No top videos found for the selected region.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div className="mt-8 bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
+                <h3 className="text-xl font-semibold mb-4 text-gray-200">Audience Retention (Example)</h3>
+                 <div className="flex flex-col items-center justify-center h-60 bg-gray-700 rounded-md text-gray-400 p-4">
+                    <p className="mb-4 text-sm font-medium text-gray-300">Simulated Retention Curve Data Points:</p>
+                    <div className="overflow-x-auto w-full">
+                        <table className="min-w-full divide-y divide-gray-600 text-sm">
+                            <thead>
+                                <tr>
+                                    <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Time Into Video</th>
+                                    <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Audience Retained</th>
+                                </tr>
+                            </thead>
+                             <tbody className="divide-y divide-gray-600">
+                                {/* Dummy data rendered here */}
+                                {audienceRetentionData.map((point, index) => (
+                                    <tr key={index}>
+                                        <td className="px-2 py-2 whitespace-nowrap text-gray-300">{point.time}</td>
+                                        <td className="px-2 py-2 whitespace-nowrap text-sm text-gray-300">{point.retention}</td>
+                                    </tr>
+                                ))}
+                             </tbody>
+                        </table>
+                    </div>
+                    <p className="mt-6 text-xs text-gray-500">
+                        (This table shows dummy data points. A real analytics chart would visualize this curve.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// --- ContentManagementContent Component (receives playlists and setPlaylists) ---
+const ContentManagementContent = ({ playlists, setPlaylists }) => {
+    const [showCreatePlaylistForm, setShowCreatePlaylistForm] = useState(false);
+    const [showUploadVideoForm, setShowUploadVideoForm] = useState(false);
+    const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+
+    const [newPlaylistDetails, setNewPlaylistDetails] = useState({
+        title: '',
+        description: '',
+        keywords: '',
+        thumbnail: null,
+        region: '',
+    });
+
+    const [newVideoDetails, setNewVideoDetails] = useState({
+        title: '',
+        description: '',
+        keywords: '',
+        // Changed from videoFile to videoLink
+        videoLink: '',
+    });
+
+    const [activeContentRegionFilter, setActiveContentRegionFilter] = useState('All');
+
+    const regions = ['All', 'Chinese', 'English', 'Myanmar', 'Indonesian', 'Vietnamese', 'Bangladeshi', 'Others'];
+
+    const handleCreatePlaylistClick = () => {
+        setShowCreatePlaylistForm(true);
+        setShowUploadVideoForm(false);
+        setSelectedPlaylist(null);
+    };
+
+    const handleCancelCreatePlaylist = () => {
+        setShowCreatePlaylistForm(false);
+        setNewPlaylistDetails({
+            title: '',
+            description: '',
+            keywords: '',
+            thumbnail: null,
+            region: '',
+        });
+    };
+
+    const handlePlaylistInputChange = (event) => {
+        const { name, value, type, files } = event.target;
+        setNewPlaylistDetails(prevDetails => ({
+            ...prevDetails,
+            [name]: type === 'file' ? files[0] : value,
+        }));
+    };
+
+    const handleCreatePlaylistSubmit = (event) => {
+        event.preventDefault();
+        const newPlaylist = {
+            id: playlists.length + 1,
+            ...newPlaylistDetails,
+            videos: [],
+            thumbnail: newPlaylistDetails.thumbnail ? URL.createObjectURL(newPlaylistDetails.thumbnail) : "https://via.placeholder.com/150x90?text=No+Thumbnail",
+        };
+        setPlaylists([...playlists, newPlaylist]);
+        handleCancelCreatePlaylist();
+        alert(`Playlist "${newPlaylist.title}" created! (Simulated)`);
+    };
+
+    const handleSelectPlaylist = (playlist) => {
+        setSelectedPlaylist(playlist);
+        setShowUploadVideoForm(true);
+        setShowCreatePlaylistForm(false);
+        // Reset new video details state, including videoLink
+        setNewVideoDetails({
+            title: '',
+            description: '',
+            keywords: '',
+            videoLink: '', // Reset videoLink
+        });
+    };
+
+    const handleCancelUploadVideo = () => {
+        setShowUploadVideoForm(false);
+        setSelectedPlaylist(null);
+        // Reset new video details state, including videoLink
+        setNewVideoDetails({
+            title: '',
+            description: '',
+            keywords: '',
+            videoLink: '', // Reset videoLink
+        });
+    };
+
+    const handleVideoInputChange = (event) => {
+        const { name, value } = event.target; // No need for type or files anymore for link
+        setNewVideoDetails(prevDetails => ({
+            ...prevDetails,
+            [name]: value, // Store the link string directly
+        }));
+    };
+
+    const handleUploadVideoSubmit = (event) => {
+        event.preventDefault();
+        if (!selectedPlaylist) return;
+
+        // Validate if videoLink is provided
+        if (!newVideoDetails.videoLink) {
+            alert('Please provide a video embed link.');
+            return;
+        }
+
+        const newVideo = {
+            id: selectedPlaylist.videos.length + 1,
+            ...newVideoDetails,
+            // Store the videoLink instead of videoFile
+            videoLink: newVideoDetails.videoLink,
+        };
+
+        setPlaylists(playlists.map(playlist =>
+            playlist.id === selectedPlaylist.id
+                ? { ...playlist, videos: [...playlist.videos, newVideo] }
+                : playlist
+        ));
+
+        handleCancelUploadVideo();
+        alert(`Video "${newVideo.title}" uploaded to "${selectedPlaylist.title}"! (Simulated)`);
+    };
+
+     const handleContentRegionFilterChange = (event) => {
+        setActiveContentRegionFilter(event.target.value);
+    };
+
+    const filteredPlaylists = activeContentRegionFilter === 'All'
+        ? playlists
+        : playlists.filter(playlist => playlist.region === activeContentRegionFilter);
+
+
+    return (
+        <div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-200">Content Management</h2>
+
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+                <div className="flex space-x-4">
+                     <button
+                        onClick={handleCreatePlaylistClick}
+                        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-200 ease-in-out"
+                    >
+                        <FaListUl className="mr-2" />
+                        Create Playlist
+                    </button>
+                     {/* <button
+                        onClick={() => {
+                            setShowCreatePlaylistForm(false);
+                             setShowUploadVideoForm(false);
+                             setSelectedPlaylist(null);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-200 ease-in-out"
+                    >
+                        <FaVideo className="mr-2" />
+                        View Playlists
+                    </button> */}
+                </div>
+
+
+                 <div>
+                    <label htmlFor="contentRegionFilter" className="mr-2 text-gray-300 text-sm font-medium">
+                        Filter by Region:
+                    </label>
+                    <select
+                        id="contentRegionFilter"
+                        value={activeContentRegionFilter}
+                        onChange={handleContentRegionFilterChange}
+                        className="bg-gray-700 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    >
+                        {regions.map(region => (
+                            <option key={region} value={region}>{region}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            {showCreatePlaylistForm && (
+                <div className="bg-gray-800 rounded-lg p-6 mb-8 shadow-lg">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-200">Create New Playlist / Series</h3>
+                    <form onSubmit={handleCreatePlaylistSubmit}>
+                        <div className="mb-4">
+                            <label htmlFor="playlistTitle" className="block text-gray-300 text-sm font-medium mb-2">
+                                Title
+                            </label>
+                            <input
+                                type="text"
+                                id="playlistTitle"
+                                name="title"
+                                value={newPlaylistDetails.title}
+                                onChange={handlePlaylistInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="playlistDescription" className="block text-gray-300 text-sm font-medium mb-2">
+                                Description
+                            </label>
+                            <textarea
+                                id="playlistDescription"
+                                name="description"
+                                value={newPlaylistDetails.description}
+                                onChange={handlePlaylistInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                rows="3"
+                                required
+                            />
+                        </div>
+                         <div className="mb-4">
+                            <label htmlFor="playlistKeywords" className="block text-gray-300 text-sm font-medium mb-2">
+                                Keywords (comma-separated)
+                            </label>
+                            <input
+                                type="text"
+                                id="playlistKeywords"
+                                name="keywords"
+                                value={newPlaylistDetails.keywords}
+                                onChange={handlePlaylistInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="playlistThumbnail" className="block text-gray-300 text-sm font-medium mb-2">
+                                Thumbnail Image
+                            </label>
+                             <input
+                                type="file"
+                                id="playlistThumbnail"
+                                name="thumbnail"
+                                onChange={handlePlaylistInputChange}
+                                className="block w-full text-sm text-gray-400
+                                          file:mr-4 file:py-2 file:px-4
+                                          file:rounded-full file:border-0
+                                          file:text-sm file:font-semibold
+                                          file:bg-blue-50 file:text-blue-700
+                                          hover:file:bg-blue-100 cursor-pointer"
+                                accept="image/*"
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="playlistRegion" className="block text-gray-300 text-sm font-medium mb-2">
+                                Region
+                            </label>
+                            <select
+                                id="playlistRegion"
+                                name="region"
+                                value={newPlaylistDetails.region}
+                                onChange={handlePlaylistInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                required
+                            >
+                                <option value="">Select Region</option>
+                                {regions.filter(r => r !== 'All').map(region => (
+                                    <option key={region} value={region}>
+                                        {region}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="flex justify-end space-x-3">
+                            <button
+                                type="button"
+                                className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                                onClick={handleCancelCreatePlaylist}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                            >
+                                Create Playlist
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
+            {showUploadVideoForm && selectedPlaylist && (
+                 <div className="bg-gray-800 rounded-lg p-6 mb-8 shadow-lg">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-200">Upload Video to "{selectedPlaylist.title}"</h3>
+                    <form onSubmit={handleUploadVideoSubmit}>
+                         {/* Changed from file input to text input for embed link */}
+                         <div className="mb-4">
+                            <label htmlFor="videoLink" className="block text-gray-300 text-sm font-medium mb-2">
+                                Video Embed Link
+                            </label>
+                            <input
+                                type="text" // Changed type to text
+                                id="videoLink" // Changed id
+                                name="videoLink" // Changed name
+                                value={newVideoDetails.videoLink} // Bind value to videoLink state
+                                onChange={handleVideoInputChange} // Use the updated handler
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="videoTitle" className="block text-gray-300 text-sm font-medium mb-2">
+                                Title
+                            </label>
+                            <input
+                                type="text"
+                                id="videoTitle"
+                                name="title"
+                                value={newVideoDetails.title}
+                                onChange={handleVideoInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="videoDescription" className="block text-gray-300 text-sm font-medium mb-2">
+                                Description
+                            </label>
+                            <textarea
+                                id="videoDescription"
+                                name="description"
+                                value={newVideoDetails.description}
+                                onChange={handleVideoInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                rows="3"
+                            />
+                        </div>
+                         <div className="mb-6">
+                            <label htmlFor="videoKeywords" className="block text-gray-300 text-sm font-medium mb-2">
+                                Keywords (comma-separated)
+                            </label>
+                            <input
+                                type="text"
+                                id="videoKeywords"
+                                name="keywords"
+                                value={newVideoDetails.keywords}
+                                onChange={handleVideoInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="flex justify-end space-x-3">
+                             <button
+                                type="button"
+                                className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                                onClick={handleCancelUploadVideo}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                            >
+                                Upload Video
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
+
+             {!showCreatePlaylistForm && !showUploadVideoForm && (
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-200 mb-4">Your Playlists / Series ({filteredPlaylists.length})</h3>
+                    {filteredPlaylists.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredPlaylists.map(playlist => (
+                                <div
+                                    key={playlist.id}
+                                    className="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 cursor-pointer hover:border-blue-500 transition duration-200 ease-in-out"
+                                    onClick={() => handleSelectPlaylist(playlist)}
+                                >
+                                     {playlist.thumbnail && (
+                                        <img src={playlist.thumbnail} alt={playlist.title} className="w-full h-32 object-cover" />
+                                    )}
+                                    <div className="p-4">
+                                        <h4 className="text-lg font-semibold text-gray-100 mb-2">{playlist.title}</h4>
+                                        <p className="text-sm text-gray-400 mb-2">{playlist.description.substring(0, 100)}...</p>
+                                         <div className="text-xs text-gray-500 mb-2">Region: {playlist.region}</div>
+                                        <div className="text-sm text-gray-400">{playlist.videos.length} Videos</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                         <p className="text-gray-400">No playlists found for the selected region. Create a new playlist to get started.</p>
+                    )}
+                </div>
+            )}
+
+            {selectedPlaylist && !showUploadVideoForm && (
+                <div className="mt-8">
+                    <h3 className="text-xl font-semibold text-gray-200 mb-4">Videos in "{selectedPlaylist.title}" ({selectedPlaylist.videos.length})</h3>
+                     <button
+                         onClick={() => setShowUploadVideoForm(true)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mb-4 transition duration-200 ease-in-out"
+                    >
+                        <FaFileUpload className="mr-2" />
+                        Upload New Video to This Series
+                    </button>
+                     <button
+                         onClick={() => setSelectedPlaylist(null)}
+                        className="ml-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mb-4 transition duration-200 ease-in-out"
+                    >
+                        Back to Playlists
+                    </button>
+
+
+                    {selectedPlaylist.videos.length > 0 ? (
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full divide-y divide-gray-700">
+                                <thead>
+                                    <tr className="bg-gray-700">
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-md">Title</th>
+                                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Description</th>
+                                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Keywords</th>
+                                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-md">Embed Link</th> {/* Added column header */}
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-700">
+                                    {selectedPlaylist.videos.map(video => (
+                                        <tr key={video.id} className="hover:bg-gray-700 transition duration-150 ease-in-out">
+                                            <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{video.title}</td>
+                                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.description.substring(0, 100)}...</td>
+                                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{video.keywords}</td>
+                                            <td className="px-4 py-4 text-sm text-blue-400 truncate"> {/* Display the link */}
+                                                 <a href={video.videoLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                     {video.videoLink}
+                                                 </a>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p className="text-gray-400">No videos in this playlist yet.</p>
+                    )}
+                </div>
+            )}
+
+
+        </div>
+    );
+};
+
+// --- AdvertisementContent Component ---
+const AdvertisementContent = ({ playlists }) => {
+    const [adDetails, setAdDetails] = useState({
+        adFile: null,
+        targetVideo: '', // Stores the ID of the selected video
+        placement: 'before', // 'before' or 'after'
+    });
+
+    // State to store the list of configured ads
+    const [configuredAds, setConfiguredAds] = useState([]);
+
+    // Flatten the videos from all playlists into a single array for the dropdown
+    const allVideos = playlists.reduce((acc, playlist) => {
+        // Add playlist title to video title for clarity in dropdown
+        const videosWithPlaylistTitle = playlist.videos.map(video => ({
+            ...video,
+            playlistTitle: playlist.title, // Store playlist title separately
+            displayTitle: `${playlist.title}: ${video.title}`
+        }));
+        return [...acc, ...videosWithPlaylistTitle];
+    }, []);
+
+    const handleInputChange = (event) => {
+        const { name, value, type, files } = event.target;
+        setAdDetails(prevDetails => ({
+            ...prevDetails,
+            [name]: type === 'file' ? files[0] : value,
+        }));
+    };
+
+    const handleSaveAdPlacement = (event) => {
+        event.preventDefault();
+        if (!adDetails.adFile || !adDetails.targetVideo || !adDetails.placement) {
+            alert('Please select an ad file, a target video, and placement.');
+            return;
+        }
+
+        // Find the selected video object
+        const selectedVideo = allVideos.find(video => video.id.toString() === adDetails.targetVideo);
+
+        if (selectedVideo) {
+            const newAd = {
+                id: Date.now(), // Simple unique ID for the ad
+                adFileName: adDetails.adFile.name,
+                targetVideoId: selectedVideo.id,
+                targetVideoTitle: selectedVideo.displayTitle,
+                placement: adDetails.placement,
+            };
+
+            // Add the new ad to the configuredAds list
+            setConfiguredAds([...configuredAds, newAd]);
+
+             // Simulate saving the ad placement
+            console.log('Saving Ad Placement:', newAd);
+            alert(`Ad "${newAd.adFileName}" will play ${newAd.placement} "${newAd.targetVideoTitle}" (Simulated).`);
+
+            // Reset form
+            setAdDetails({
+                adFile: null,
+                targetVideo: '',
+                placement: 'before',
+            });
+             // Clear the file input visually (requires direct DOM manipulation or a ref)
+             const fileInput = document.getElementById('adFile');
+             if (fileInput) {
+                 fileInput.value = '';
+             }
+
+        } else {
+            alert('Selected video not found.');
+        }
+    };
+
+    // Function to remove an ad
+    const handleRemoveAd = (adId) => {
+        setConfiguredAds(configuredAds.filter(ad => ad.id !== adId));
+        alert('Ad removed.');
+    };
+
+
+    return (
+        <div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-200">Advertisement Management</h2>
+
+            <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700 mb-8"> {/* Added margin-bottom */}
+                <h3 className="text-xl font-semibold mb-4 text-gray-200">Upload and Place Video Ad</h3>
+                <form onSubmit={handleSaveAdPlacement}>
+                    {/* Ad File Upload */}
+                    <div className="mb-4">
+                        <label htmlFor="adFile" className="block text-gray-300 text-sm font-medium mb-2">
+                            Select Video Ad File
+                        </label>
+                        <input
+                            type="file"
+                            id="adFile"
+                            name="adFile"
+                            onChange={handleInputChange}
+                            className="block w-full text-sm text-gray-400
+                                      file:mr-4 file:py-2 file:px-4
+                                      file:rounded-full file:border-0
+                                      file:text-sm file:font-semibold
+                                      file:bg-blue-50 file:text-blue-700
+                                      hover:file:bg-blue-100 cursor-pointer"
+                            accept="video/*"
+                            required
+                        />
+                    </div>
+
+                    {/* Target Video Selection */}
+                    <div className="mb-4">
+                        <label htmlFor="targetVideo" className="block text-gray-300 text-sm font-medium mb-2">
+                            Select Video for Ad Placement
+                        </label>
+                        <select
+                            id="targetVideo"
+                            name="targetVideo"
+                            value={adDetails.targetVideo}
+                            onChange={handleInputChange}
+                            className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            required
+                        >
+                            <option value="">-- Select a Video --</option>
+                            {allVideos.map(video => (
+                                <option key={video.id} value={video.id}>
+                                    {video.displayTitle}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Ad Placement Selection */}
+                    <div className="mb-6">
+                        <label className="block text-gray-300 text-sm font-medium mb-2">
+                            Ad Placement
+                        </label>
+                        <div className="flex items-center space-x-4">
+                            <label className="inline-flex items-center">
+                                <input
+                                    type="radio"
+                                    name="placement"
+                                    value="before"
+                                    checked={adDetails.placement === 'before'}
+                                    onChange={handleInputChange}
+                                    className="form-radio text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                />
+                                <span className="ml-2 text-gray-300">Before Video</span>
+                            </label>
+                            <label className="inline-flex items-center">
+                                <input
+                                    type="radio"
+                                    name="placement"
+                                    value="after"
+                                    checked={adDetails.placement === 'after'}
+                                    onChange={handleInputChange}
+                                    className="form-radio text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                />
+                                <span className="ml-2 text-gray-300">After Video</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    {/* Save Button */}
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                        >
+                            Save Ad Placement
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+             {/* Display List of Configured Ads */}
+             <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
+                 <h3 className="text-xl font-semibold mb-4 text-gray-200">Configured Ads ({configuredAds.length})</h3>
+                 {configuredAds.length > 0 ? (
+                     <div className="space-y-4"> {/* Space between ad items */}
+                         {configuredAds.map(ad => (
+                             <div key={ad.id} className="bg-gray-700 rounded-md p-4 flex items-center justify-between">
+                                 <div>
+                                     <div className="font-semibold text-gray-100">{ad.adFileName}</div>
+                                     <div className="text-sm text-gray-300">Plays {ad.placement} "{ad.targetVideoTitle}"</div>
+                                 </div>
+                                 <button
+                                     onClick={() => handleRemoveAd(ad.id)}
+                                     className="text-red-500 hover:text-red-700 transition duration-200 ease-in-out"
+                                     title="Remove Ad"
+                                 >
+                                     <FaTrashAlt className="text-lg" />
+                                 </button>
+                             </div>
+                         ))}
+                     </div>
+                 ) : (
+                     <p className="text-gray-400">No ads configured yet. Upload a video ad above to get started.</p>
+                 )}
+             </div>
+        </div>
+    );
+};
+
+
+// --- ChannelImpressionsContent Component ---
+const ChannelImpressionsContent = ({ channelGroups, setChannelGroups }) => {
+    const [newGroupLink, setNewGroupLink] = useState({
+        region: '',
+        type: '',
+        link: '',
+    });
+    const [editingGroup, setEditingGroup] = useState(null); // Stores the group being edited
+
+    const regions = ['English', 'Chinese', 'Myanmar', 'Indonesian', 'Vietnamese', 'Bangladeshi', 'Others'];
+    const groupTypes = {
+        English: ['Telegram', 'WhatsApp'],
+        Chinese: ['WeChat', 'Weibo'],
+        Myanmar: ['Telegram', 'WhatsApp'],
+        Indonesian: ['Telegram', 'WhatsApp'],
+        Vietnamese: ['Telegram', 'WhatsApp'],
+        Bangladeshi: ['Telegram', 'WhatsApp'],
+        Others: ['Telegram', 'WhatsApp'], // Default for others
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setNewGroupLink(prevDetails => ({
+            ...prevDetails,
+            [name]: value,
+        }));
+    };
+
+    const handleAddGroupLink = (event) => {
+        event.preventDefault();
+        if (!newGroupLink.region || !newGroupLink.type || !newGroupLink.link) {
+            alert('Please select a region, type, and enter a link.');
+            return;
+        }
+
+        const newGroup = {
+            id: Date.now(), // Simple unique ID
+            ...newGroupLink,
+            clicks: 0, // Initialize clicks to 0
+        };
+
+        setChannelGroups([...channelGroups, newGroup]);
+        alert('Group link added!');
+
+        // Reset form
+        setNewGroupLink({
+            region: '',
+            type: '',
+            link: '',
+        });
+    };
+
+    const handleEditClick = (group) => {
+        setEditingGroup({ ...group }); // Set the group to be edited
+    };
+
+    const handleEditInputChange = (event) => {
+        const { name, value } = event.target;
+        setEditingGroup(prevDetails => ({
+            ...prevDetails,
+            [name]: value,
+        }));
+    };
+
+    const handleSaveEdit = (event) => {
+        event.preventDefault();
+        if (!editingGroup.region || !editingGroup.type || !editingGroup.link) {
+            alert('Please ensure all fields are filled.');
+            return;
+        }
+
+        setChannelGroups(channelGroups.map(group =>
+            group.id === editingGroup.id ? editingGroup : group
+        ));
+        alert('Group link updated!');
+        setEditingGroup(null); // Exit editing mode
+    };
+
+    const handleCancelEdit = () => {
+        setEditingGroup(null); // Exit editing mode
+    };
+
+    const handleRemoveGroup = (groupId) => {
+        setChannelGroups(channelGroups.filter(group => group.id !== groupId));
+        alert('Group link removed.');
+    };
+
+    // Group channel groups by region for display
+    const groupsByRegion = channelGroups.reduce((acc, group) => {
+        acc[group.region] = acc[group.region] || [];
+        acc[group.region].push(group);
+        return acc;
+    }, {});
+
+    return (
+        <div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-200">Channel Impressions</h2>
+
+            {/* Add New Group Link Form */}
+            <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700 mb-8">
+                <h3 className="text-xl font-semibold mb-4 text-gray-200">Add New Group Link</h3>
+                <form onSubmit={handleAddGroupLink}>
+                     {/* Region Selection */}
+                    <div className="mb-4">
+                        <label htmlFor="newGroupRegion" className="block text-gray-300 text-sm font-medium mb-2">
+                            Region
+                        </label>
+                        <select
+                            id="newGroupRegion"
+                            name="region"
+                            value={newGroupLink.region}
+                            onChange={handleInputChange}
+                            className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            required
+                        >
+                            <option value="">Select Region</option>
+                            {regions.map(region => (
+                                <option key={region} value={region}>{region}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Type Selection (based on selected region) */}
+                    {newGroupLink.region && (
+                         <div className="mb-4">
+                            <label htmlFor="newGroupType" className="block text-gray-300 text-sm font-medium mb-2">
+                                Type
+                            </label>
+                            <select
+                                id="newGroupType"
+                                name="type"
+                                value={newGroupLink.type}
+                                onChange={handleInputChange}
+                                className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                required
+                            >
+                                <option value="">Select Type</option>
+                                {groupTypes[newGroupLink.region]?.map(type => (
+                                    <option key={type} value={type}>{type}</option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+
+
+                    {/* Link Input */}
+                    <div className="mb-6">
+                        <label htmlFor="newGroupLink" className="block text-gray-300 text-sm font-medium mb-2">
+                            Link
+                        </label>
+                        <input
+                            type="text"
+                            id="newGroupLink"
+                            name="link"
+                            value={newGroupLink.link}
+                            onChange={handleInputChange}
+                            className="shadow-sm bg-gray-700 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            required
+                        />
+                    </div>
+
+                    {/* Add Button */}
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-200 ease-in-out"
+                        >
+                             <FaPlusCircle className="mr-2" />
+                            Add Link
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            {/* Display Channel Group Links by Region */}
+            <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
+                <h3 className="text-xl font-semibold mb-4 text-gray-200">Channel Group Links by Region</h3>
+                {Object.keys(groupsByRegion).length > 0 ? (
+                    <div className="space-y-6"> {/* Space between regions */}
+                        {Object.keys(groupsByRegion).map(region => (
+                            <div key={region}>
+                                <h4 className="text-lg font-semibold text-gray-300 mb-3">{region}</h4>
+                                <div className="space-y-3"> {/* Space between group links */}
+                                    {groupsByRegion[region].map(group => (
+                                        <div key={group.id} className="bg-gray-700 rounded-md p-4 flex items-center justify-between">
+                                            {editingGroup && editingGroup.id === group.id ? (
+                                                // Edit Form
+                                                <form onSubmit={handleSaveEdit} className="flex-grow grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                                                    <div>
+                                                        <label htmlFor={`editRegion-${group.id}`} className="sr-only">Region</label>
+                                                         <select
+                                                            id={`editRegion-${group.id}`}
+                                                            name="region"
+                                                            value={editingGroup.region}
+                                                            onChange={handleEditInputChange}
+                                                             className="shadow-sm bg-gray-800 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                                            required
+                                                        >
+                                                            {regions.map(r => (
+                                                                <option key={r} value={r}>{r}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                     <div>
+                                                        <label htmlFor={`editType-${group.id}`} className="sr-only">Type</label>
+                                                        <select
+                                                            id={`editType-${group.id}`}
+                                                            name="type"
+                                                            value={editingGroup.type}
+                                                            onChange={handleEditInputChange}
+                                                            className="shadow-sm bg-gray-800 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                                            required
+                                                        >
+                                                             {groupTypes[editingGroup.region]?.map(type => (
+                                                                <option key={type} value={type}>{type}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    <div className="sm:col-span-1">
+                                                        <label htmlFor={`editLink-${group.id}`} className="sr-only">Link</label>
+                                                        <input
+                                                            type="text"
+                                                            id={`editLink-${group.id}`}
+                                                            name="link"
+                                                            value={editingGroup.link}
+                                                            onChange={handleEditInputChange}
+                                                            className="shadow-sm bg-gray-800 border border-gray-600 rounded-md w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="flex space-x-2 sm:col-span-3 justify-end">
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleCancelEdit}
+                                                            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-1 px-3 rounded text-sm transition duration-200 ease-in-out"
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                        <button
+                                                            type="submit"
+                                                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm transition duration-200 ease-in-out"
+                                                        >
+                                                            Save
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            ) : (
+                                                // Display Group Details
+                                                <div className="flex-grow grid grid-cols-3 items-center">
+                                                    <div className="text-gray-100 text-sm">{group.type}</div>
+                                                    <div className="text-gray-300 text-sm truncate">
+                                                         <a href={group.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                            {group.link}
+                                                         </a>
+                                                    </div>
+                                                    <div className="text-gray-400 text-sm ml-4">{group.clicks} Clicks</div>
+                                                </div>
+                                            )}
+
+
+                                            {/* Action Buttons (Edit and Remove) */}
+                                            {!editingGroup || editingGroup.id !== group.id ? (
+                                                <div className="flex space-x-2 ml-4 flex-shrink-0">
+                                                    <button
+                                                        onClick={() => handleEditClick(group)}
+                                                        className="text-blue-400 hover:text-blue-600 transition duration-200 ease-in-out"
+                                                        title="Edit Link"
+                                                    >
+                                                        <FaEdit className="text-lg" />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleRemoveGroup(group.id)}
+                                                        className="text-red-500 hover:text-red-700 transition duration-200 ease-in-out"
+                                                        title="Remove Link"
+                                                    >
+                                                        <FaTrashAlt className="text-lg" />
+                                                    </button>
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-gray-400">No channel group links added yet. Add a new link above to get started.</p>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// --- Settings Content (removed) ---
+// const SettingsContent = () => { ... } // This component is removed
+
+export default AdminPanel;

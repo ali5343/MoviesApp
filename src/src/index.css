@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* styles.css (or your global CSS file) */
+.scrollbar-hide {
+    /* For Chrome, Safari and Opera */
+    -webkit-overflow-scrolling: touch; /* Optional: Enables momentum scrolling on touch devices */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    /* For Firefox */
+    scrollbar-width: none;
+  }
+  

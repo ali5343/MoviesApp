@@ -1,0 +1,203 @@
+import { useState, useEffect, useRef } from 'react';
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import DetailView from './DetailView';
+
+const ContentRow = ({ title, items, viewAll = false, type = "normal", comingSoon = false }) => {
+  const [selectedShow, setSelectedShow] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef(null);
+  const [visibleItemsCount, setVisibleItemsCount] = useState(4); // Start with 4 items
+  const [showViewMore, setShowViewMore] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    // Reset visible items count when switching between mobile and desktop
+    if (isMobile) {
+      setVisibleItemsCount(4); // Always start with 4 items on mobile
+      // Only show View More if there are more than 4 items AND title is not "Coming Soon"
+      setShowViewMore(items.length > 4 && title !== "Coming Soon");
+    } else {
+      setVisibleItemsCount(items.length); // Show all on desktop
+      setShowViewMore(false);
+    }
+  }, [isMobile, items.length, title]); // Added title to dependencies
+
+  const handleItemClick = (item) => {
+    setSelectedShow(item);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedShow(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  const scroll = (direction) => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.clientWidth;
+      const scrollAmount = direction === 'left' ? -containerWidth : containerWidth;
+      containerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const loadMoreItems = () => {
+    setVisibleItemsCount(prevCount => {
+      const newCount = Math.min(prevCount + 4, items.length);
+      // Hide "View More" when all items are shown
+      if (newCount >= items.length) {
+        setShowViewMore(false);
+      }
+      return newCount;
+    });
+  };
+
+  // Show grid layout only for mobile AND not "Coming Soon"
+  const isGrid = isMobile && title !== "Coming Soon";
+
+  // For mobile, show only visibleItemsCount items
+  // For "Coming Soon" on mobile, show all items as horizontal scroll
+  // For desktop, always show all items
+  const visibleItems = (isMobile && title !== "Coming Soon") 
+    ? items.slice(0, visibleItemsCount) 
+    : items;
+
+  return (
+    <>
+      <div className="py-5 relative group">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold">{title}</h2>
+          {viewAll && !isMobile && (
+            <div className="flex items-center text-sm text-gray-400 hover:text-green-500 cursor-pointer">
+              <span>View All</span>
+              <FaChevronRight className="ml-1 text-xs" />
+            </div>
+          )}
+        </div>
+
+        <div className="relative">
+          {!isGrid && (
+            <>
+              <button
+                onClick={() => scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <FaChevronLeft className="text-white" />
+              </button>
+            </>
+          )}
+
+          <div
+            ref={containerRef}
+            className={`${isGrid
+              ? "grid grid-cols-2 gap-3"
+              : "flex overflow-x-auto space-x-3 pb-4 scrollbar-hide"
+              }`}
+            style={{
+              display: isGrid ? "grid" : "flex",
+              gridTemplateColumns: isGrid ? "repeat(2, minmax(0, 1fr))" : undefined,
+            }}
+          >
+            {visibleItems.map((item) => (
+              <div
+                key={item.id}
+                className={`${isGrid
+                  ? "relative group/item cursor-pointer"
+                  : "flex-shrink-0 relative group/item cursor-pointer"
+                  }`}
+                style={{
+                  width: isGrid ? '100%' : type === "ranked" ? "180px" : "170px",
+                }}
+                onClick={() => handleItemClick(item)}
+              >
+                {type === "ranked" && (
+                  <div className="absolute top-0 left-0 w-8 h-8 bg-green-500 flex items-center justify-center text-black font-bold z-10">
+                    {item.rank}
+                  </div>
+                )}
+
+                <div className="rounded-md overflow-hidden relative">
+                  <img
+                    src={item.poster}
+                    alt={item.title}
+                    className="w-full h-56 object-cover"
+                  />
+
+                  {comingSoon && (
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="mb-1">
+                          <span className="inline-block w-2 h-2 bg-white rounded-full mx-1"></span>
+                          <span className="inline-block w-2 h-2 bg-white rounded-full mx-1"></span>
+                          <span className="inline-block w-2 h-2 bg-white rounded-full mx-1"></span>
+                        </div>
+                        <div className="text-sm">{item.episodes}</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {!comingSoon && (
+                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity">
+                      <button className="bg-green-500 text-black text-xs rounded-full px-3 py-1 font-semibold">
+                        Watch now
+                      </button>
+                    </div>
+                  )}
+
+                  {item.rating && (
+                    <div className="absolute top-1 right-1 bg-black/70 text-white text-xs px-1.5 py-0.5 rounded">
+                      ★ {item.rating}
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-2">
+                  <p className="text-sm font-semibold truncate">{item.title}</p>
+                  {item.episodes && (
+                    <p className="text-xs text-gray-400">{item.episodes}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {showViewMore && (
+            <div className="text-center mt-4">
+              <button
+                onClick={loadMoreItems}
+                className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md"
+              >
+                View More
+              </button>
+            </div>
+          )}
+
+          {!isGrid && (
+            <>
+              <button
+                onClick={() => scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <FaChevronRight className="text-white" />
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+
+      {selectedShow && (
+        <DetailView show={selectedShow} onClose={handleCloseDetail} />
+      )}
+    </>
+  );
+};
+
+export default ContentRow;

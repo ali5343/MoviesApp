@@ -1,0 +1,154 @@
+// App.js
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
+import LanguageSelector from '../components/LanguageSelector';
+import HeroSection from '../components/HeroSection';
+// If using the updated HeroSection component from this file
+import ContentRow from '../components/ContentRow';
+import ThirdPartyJoin from '../components/ThirdPartyJoin';
+import Footer from '../components/Footer';
+import data from '../data/data.json';
+
+function Home() {
+  // Sample data for content rows
+  const popularSeriesData = {
+    id: 1,
+    title: "Popular Series",
+    items: [
+      { id: 1, title: "NORTHWARD", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.7", episodes: "Updated to 36" },
+      { id: 2, title: "UNNATURAL FIRE", poster: "https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg", rating: "9.4", episodes: "Updated to 40" },
+      { id: 3, title: "Little Youth", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "8.9", episodes: "All Episodes" },
+      { id: 4, title: "Divine Tree", poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg", rating: "9.5", episodes: "Love of the Divine Tree" },
+      { id: 5, title: "ALL EYES ON ME", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.2", episodes: "Romance With Me" },
+      { id: 6, title: "Midnight Eve", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "9.1", episodes: "Midnight Romance" },
+      { id: 7, title: "NORTHWARD", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.7", episodes: "Updated to 36" },
+      { id: 8, title: "UNNATURAL FIRE", poster: "https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg", rating: "9.4", episodes: "Updated to 40" },
+      { id: 9, title: "Little Youth", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "8.9", episodes: "All Episodes" },
+      { id: 10, title: "Divine Tree", poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg", rating: "9.5", episodes: "Love of the Divine Tree" },
+      { id: 11, title: "ALL EYES ON ME", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.2", episodes: "Romance With Me" },
+      { id: 12, title: "Midnight Eve", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "9.1", episodes: "Midnight Romance" }
+    ]
+  };
+  
+  const latestReleasesData = {
+    id: 2,
+    title: "Latest Releases",
+    items: [
+      { id: 1, title: "NORTHWARD", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.7", episodes: "Updated to 36" },
+      { id: 2, title: "UNNATURAL FIRE", poster: "https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg", rating: "9.4", episodes: "Updated to 40" },
+      { id: 3, title: "Little Youth", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "8.9", episodes: "All Episodes" },
+      { id: 4, title: "Divine Tree", poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg", rating: "9.5", episodes: "Love of the Divine Tree" },
+      { id: 5, title: "ALL EYES ON ME", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.2", episodes: "Romance With Me" },
+      { id: 6, title: "Midnight Eve", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "9.1", episodes: "Midnight Romance" },
+      { id: 7, title: "EMPRESS PALACE", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.0", episodes: "Tale of Enduring Palace" },
+      { id: 8, title: "Love In The Air", poster: "https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg", rating: "8.8", episodes: "13 Episodes" },
+      { id: 9, title: "Just Between Us", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "8.7", episodes: "24 Episodes" },
+      { id: 10, title: "CAPTAIN", poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg", rating: "9.3", episodes: "The Drifting Captain" },
+      { id: 11, title: "EXORCIST", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "9.4", episodes: "All Episodes" },
+      { id: 12, title: "MONKEY KING", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "9.5", episodes: "Monkey King Fights Evil Demon" }
+    ]
+  };
+
+  const comingSoonData = {
+    id: 3,
+    title: "Coming Soon",
+    items: [
+      { id: 19, title: "Fox Nine Stories", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" },
+      { id: 20, title: "A Moment Got Forever", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" },
+      { id: 21, title: "Doze Office", poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" },
+      { id: 22, title: "FEVER", poster: "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" },
+      { id: 23, title: "Love in Paradise", poster: "https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" },
+      { id: 24, title: "Tiger Spirit Impressions", poster: "https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg", rating: "New", episodes: "Coming soon" }
+    ]
+  };
+
+  return (
+    <div className="bg-gray-900 text-white min-h-screen">
+      <Navbar />
+      <LanguageSelector />
+      <HeroSection />
+      
+      <div className="container mx-auto px-4 py-4">
+        {/* Section 1: Slider - Already included in HeroSection */}
+        
+        {/* Section 2: Popular Series */}
+        <ContentRow 
+          key={popularSeriesData.id}
+          title={popularSeriesData.title}
+          items={popularSeriesData.items}
+          viewAll={true}
+        />
+        
+        {/* Section 3: Latest Releases */}
+        <ContentRow 
+          key={latestReleasesData.id}
+          title={latestReleasesData.title}
+          items={latestReleasesData.items}
+          viewAll={true}
+        />
+        
+        {/* Section 4: Third Party Join Options */}
+        <ThirdPartyJoin />
+        
+        {/* Section 5: Coming Soon */}
+        <ContentRow 
+          key={comingSoonData.id}
+          title={comingSoonData.title}
+          items={comingSoonData.items}
+          comingSoon={true}
+        />
+        
+        {/* Popular Channels Section */}
+        {/* <div className="py-8">
+          <h2 className="text-2xl font-bold mb-6">Popular Channels</h2>
+          <div className="flex overflow-x-auto space-x-6 pb-4">
+            {['Bai Lu', 'Zhang Ling He', 'Chen Zhe Yuan', 'Choi Yu', 'Esther Yu', 'Chen Du Ling', 'Johnny Huang', 'Xu Kai'].map((name, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-blue-500 overflow-hidden mb-2">
+                  <img 
+                    src={`/api/placeholder/100/100`} 
+                    alt={name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm text-center">{name}</p>
+              </div>
+            ))}
+          </div>
+        </div> */}
+        
+        {/* Web Series Section */}
+        {/* <div className="py-8">
+          <h2 className="text-2xl font-bold mb-6">Web Series</h2>
+          <div className="flex overflow-x-auto space-x-4 pb-4">
+            {[
+              { title: "Warrior's Journey", episodes: "37 Episodes" },
+              { title: "To Ship Someone", episodes: "10 Episodes" },
+              { title: "Fading Garden Fireworks", episodes: "All Episodes" },
+              { title: "Mommy's Chambermaid", episodes: "40 Episodes" },
+              { title: "Chili Red Dog", episodes: "16 Episodes" },
+              { title: "The Best Friend", episodes: "28 Episodes" }
+            ].map((item, index) => (
+              <div key={index} className="w-48 rounded overflow-hidden shadow-lg bg-gray-800 hover:shadow-blue-900/30 hover:shadow-xl transition duration-300">
+                <div className="relative">
+                  <img 
+                    src={`/api/placeholder/240/340`} 
+                    alt={item.title} 
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3">
+                    <h3 className="font-semibold text-sm">{item.title}</h3>
+                    <p className="text-xs text-gray-300">{item.episodes}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div> */}
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+export default Home;

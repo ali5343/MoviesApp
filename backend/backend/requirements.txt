@@ -1,0 +1,9 @@
+Flask
+pymongo
+Flask-PyMongo
+Flask-JWT-Extended
+Flask-CORS
+python-dotenv
+werkzeug
+Pydantic
+bcrypt  # For password hashing

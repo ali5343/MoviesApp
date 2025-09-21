@@ -1,0 +1,702 @@
+{
+    "en": {
+        "navbar": {
+            "foryou": "For You",
+            "drama": "Drama",
+            "movie": "Movie",
+            "variety": "Variety",
+            "animation": "Animation",
+            "search": "Search",
+            "download": "Download",
+            "bell": "Notification",
+            "vip": "VIP",
+            "try": "TRY"
+        },
+        "heroSection": {
+            "play": "Play",
+            "add": "Add"
+        },
+        "contentRow": {
+            "viewAll": "View All"
+        },
+        "detailView": {
+            "episodes": "Episodes",
+            "comments": "Comments",
+            "recommendations": "Recommendations",
+            "topRated": "Top Rated",
+            "description": "Description",
+            "director": "Director",
+            "starring": "Starring"
+        },
+        "videoPlayerPage": {
+            "like": "Like",
+            "reply": "Reply",
+            "share": "Share",
+            "downloadApp": "Download V9.4.0 APP",
+            "watchOnTV": "Watch on TV",
+            "getAppExperience": "Get the Best Experience on the APP",
+            "computer": "Computer",
+            "phone": "Phone",
+            "tv": "TV",
+            "web": "Web"
+        },
+        "popularCelebrities": {
+            "viewAll": "View All"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "Join us on Whatsapp",
+            "telegram": "Join us on Telegram"
+        },
+        "footer": {
+            "company": "Company",
+            "about": "About LOGO",
+            "careers": "Careers",
+            "businessCooperation": "Business Cooperation",
+            "helpSupport": "Help and Support",
+            "contactUs": "Contact Us",
+            "faqs": "FAQs",
+            "deviceSupport": "Device Support",
+            "termsOfService": "Terms of Service",
+            "termsOfUse": "Terms of Use",
+            "privacyPolicy": "Privacy Policy",
+            "copyrightPolicy": "Copyright Policy",
+            "followUs": "Follow Us",
+            "copyright": "© LOGO. All Rights Reserved."
+        },
+        "app": {
+            "popularSeries": "Popular Series",
+            "latestMovies": "Latest Movies",
+            "popularCelebrities": "Popular Celebrities"
+        }
+    },
+    "id": {
+        "navbar": {
+            "foryou": "Untukmu",
+            "drama": "Drama",
+            "movie": "Film",
+            "variety": "Variasi",
+            "animation": "Animasi",
+            "search": "Pencarian",
+            "download": "Unduh",
+            "bell": "Notifikasi",
+            "vip": "VIP",
+            "try": "COBA"
+        },
+        "heroSection": {
+            "play": "Putar",
+            "add": "Tambah"
+        },
+        "contentRow": {
+            "viewAll": "Lihat Semua"
+        },
+        "detailView": {
+            "episodes": "Episode",
+            "comments": "Komentar",
+            "recommendations": "Rekomendasi",
+            "topRated": "Teratas",
+            "description": "Deskripsi",
+            "director": "Direktur",
+            "starring": "Dibintangi"
+        },
+        "videoPlayerPage": {
+            "like": "Suka",
+            "reply": "Balas",
+            "share": "Bagikan",
+            "downloadApp": "Unduh APP V9.4.0",
+            "watchOnTV": "Tonton di TV",
+            "getAppExperience": "Dapatkan Pengalaman Terbaik di APP",
+            "computer": "Komputer",
+            "phone": "Telepon",
+            "tv": "TV",
+            "web": "Web"
+        },
+        "popularCelebrities": {
+            "viewAll": "Lihat Semua"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "Gabung di Whatsapp",
+            "telegram": "Gabung di Telegram"
+        },
+        "footer": {
+            "company": "Perusahaan",
+            "about": "Tentang LOGO",
+            "careers": "Karir",
+            "businessCooperation": "Kerja Sama Bisnis",
+            "helpSupport": "Bantuan dan Dukungan",
+            "contactUs": "Hubungi Kami",
+            "faqs": "Pertanyaan Umum",
+            "deviceSupport": "Dukungan Perangkat",
+            "termsOfService": "Ketentuan Layanan",
+            "termsOfUse": "Ketentuan Penggunaan",
+            "privacyPolicy": "Kebijakan Privasi",
+            "copyrightPolicy": "Kebijakan Hak Cipta",
+            "followUs": "Ikuti Kami",
+            "copyright": "© LOGO. Semua Hak Dilindungi."
+        },
+        "app": {
+            "popularSeries": "Serial Populer",
+            "latestMovies": "Film Terbaru",
+            "popularCelebrities": "Selebriti Populer"
+        }
+    },
+    "cn": {
+        "navbar": {
+            "foryou": "为你推荐",
+            "drama": "剧集",
+            "movie": "电影",
+            "variety": "综艺",
+            "animation": "动漫",
+            "search": "搜索",
+            "download": "下载",
+            "bell": "消息",
+            "vip": "VIP",
+            "try": "试用"
+        },
+        "heroSection": {
+            "play": "播放",
+            "add": "添加"
+        },
+        "contentRow": {
+            "viewAll": "查看全部"
+        },
+        "detailView": {
+            "episodes": "剧集",
+            "comments": "评论",
+            "recommendations": "推荐",
+            "topRated": "热门",
+            "description": "简介",
+            "director": "导演",
+            "starring": "主演"
+        },
+        "videoPlayerPage": {
+            "like": "点赞",
+            "reply": "回复",
+            "share": "分享",
+            "downloadApp": "下载 V9.4.0 版本",
+            "watchOnTV": "在电视上观看",
+            "getAppExperience": "在应用程序上获得最佳体验",
+            "computer": "电脑",
+            "phone": "手机",
+            "tv": "电视",
+            "web": "网页"
+        },
+        "popularCelebrities": {
+            "viewAll": "查看全部"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "加入我们的Whatsapp",
+            "telegram": "加入我们的Telegram"
+        },
+        "footer": {
+            "company": "公司",
+            "about": "关于 LOGO",
+            "careers": "工作机会",
+            "businessCooperation": "商务合作",
+            "helpSupport": "帮助与支持",
+            "contactUs": "联系我们",
+            "faqs": "常见问题",
+            "deviceSupport": "设备支持",
+            "termsOfService": "服务条款",
+            "termsOfUse": "使用条款",
+            "privacyPolicy": "隐私政策",
+            "copyrightPolicy": "版权政策",
+            "followUs": "关注我们",
+            "copyright": "© LOGO. 版权所有."
+        },
+        "app": {
+            "popularSeries": "热门剧集",
+            "latestMovies": "最新电影",
+            "popularCelebrities": "热门明星"
+        }
+    },
+    "mm": {
+        "navbar": {
+            "foryou": "သင့်အတွက်",
+            "drama": "ဒရာမာ",
+            "movie": "ကုပ်လုံးရုံး",
+            "variety": "မျိုးစိတ်များ",
+            "animation": "အိမ်းအားနား",
+            "search": "ရှာဖွေရန်",
+            "download": "အောင်မြင်စားရန်",
+            "bell": "သိတ်သိင်္ခြောက်နံ့",
+            "vip": "VIP",
+            "try": "သို့်ရား"
+        },
+        "heroSection": {
+            "play": "ပြောင်းရွှပ်ပါ",
+            "add": "ထည့်သွင်းပါ"
+        },
+        "contentRow": {
+            "viewAll": "အားလုံးကြည့်ရန်"
+        },
+        "detailView": {
+            "episodes": "အပိုဒ်များ",
+            "comments": "အမှု့ကိုးကားများ",
+            "recommendations": "အကြံပေးချက်များ",
+            "topRated": "အမြင့်ဆုံးရေတီနောက်",
+            "description": "ဖော်ပြချက်",
+            "director": "ဦးဆောင်သူ",
+            "starring": "အဓိကအသင်းဝင်သူများ"
+        },
+        "videoPlayerPage": {
+            "like": "ကြိုက်ရုံးခြင်း",
+            "reply": "အမှု့ကိုးကားပေးရန်",
+            "share": "ဌာန်းပို့ခြင်း",
+            "downloadApp": "V9.4.0 ပွဲ့ရောင်းမှု ဦးဆောင်ပြီးသော အောင်မြင်စားရောင်းချိန်",
+            "watchOnTV": "တီဗီတွင် ကြည့်ရန်",
+            "getAppExperience": "ဥပမာ့် ဦးဆောင်ပြီးသော အောင်မြင်စားရောင်းခိုင်းစားမှု့ ဦးဆောင်ပြီးသော အောင်မြင်စားရောင်းချိန်",
+            "computer": "ကွန်ပျူတာ",
+            "phone": "ဖုန်း",
+            "tv": "တီဗီ",
+            "web": "အိုင်တာနက်"
+        },
+        "popularCelebrities": {
+            "viewAll": "အားလုံးကြည့်ရန်"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "သို့်ရား သို့်ရား သို့်ရား ပါဝင်ပါ",
+            "telegram": "သို့်ရား သို့်ရား သို့်ရား ပါဝင်ပါ"
+        },
+        "footer": {
+            "company": "ကုမ္ပဏီ",
+            "about": "LOGO အကြောင်း",
+            "careers": "အလုပ်ရှိခွင့်များ",
+            "businessCooperation": "လုပ်ငန်းခြုံခြုံ့ရေး",
+            "helpSupport": "ကူညီနိုင်သောနိုင်ယံ့များနှင့် အားဖြည်းခြင်း",
+            "contactUs": "ကွဲပြားပါ",
+            "faqs": "သို့်ရား ပေါင်းသည် မူးအမားအခါ",
+            "deviceSupport": "လုပ်ငန်းရေးကုန်းဆောင်များ",
+            "termsOfService": "ဝန်ဆောင်မှု့ ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း",
+            "termsOfUse": "အသုံးပြုခြင်း့ ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း",
+            "privacyPolicy": "ပိုင်ရှိရေး ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း",
+            "copyrightPolicy": "ဥပမာ့် ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း",
+            "followUs": "ဥပမာ့် ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း",
+            "copyright": "© LOGO. အားလုံးအခွင့်အရေးအတွက် ဥပမာ့် ဦးဆောင်ပြီးသော အကြောင်းအကြောင်း"
+        },
+        "app": {
+            "popularSeries": "အလေးလေးအားလုံးလုံး",
+            "latestMovies": "သို့်ရား ကုပ်လုံးရုံး",
+            "popularCelebrities": "အလေးလေးအိုင်တာနက်"
+        }
+    },
+    "hi": {
+        "navbar": {
+            "foryou": "आपके लिए",
+            "drama": "ड्रामा",
+            "movie": "फिल्म",
+            "variety": "विविधता",
+            "animation": "एनिमेशन",
+            "search": "खोजें",
+            "download": "डाउनलोड करें",
+            "bell": "अधिसूचना",
+            "vip": "वीआईपी",
+            "try": "आजमाएं"
+        },
+        "heroSection": {
+            "play": "प्लेई",
+            "add": "एड"
+        },
+        "contentRow": {
+            "viewAll": "सभी को देखें"
+        },
+        "detailView": {
+            "episodes": "एपिसोड्स",
+            "comments": "कमेंट्स",
+            "recommendations": "सिफारिशें",
+            "topRated": "टॉप रेटेड",
+            "description": "विवरण",
+            "director": "डायरेक्टर",
+            "starring": "स्टारिंग"
+        },
+        "videoPlayerPage": {
+            "like": "लाइक",
+            "reply": "रिप्लाई",
+            "share": "शेयर",
+            "downloadApp": "V9.4.0 ऐप डाउनलोड करें",
+            "watchOnTV": "टीवी पर देखें",
+            "getAppExperience": "एप पर बेस्ट एक्सपीरियन्स प्राप्त करें",
+            "computer": "कंप्यूटर",
+            "phone": "फोन",
+            "tv": "टीवी",
+            "web": "वेब"
+        },
+        "popularCelebrities": {
+            "viewAll": "सभी को देखें"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "व्हाट्सएप पर हमें जोड़ें",
+            "telegram": "टेलीग्राम पर हमें जोड़ें"
+        },
+        "footer": {
+            "company": "कंपनी",
+            "about": "LOGO के बारे में",
+            "careers": "कैरियर",
+            "businessCooperation": "व्यापार सहयोग",
+            "helpSupport": "मदद और सपोर्ट",
+            "contactUs": "हमसे संपर्क करें",
+            "faqs": "आम तौर पर पूछे जाने वाले प्रश्न",
+            "deviceSupport": "डिवाइस सपोर्ट",
+            "termsOfService": "सेवा के शर्तों",
+            "termsOfUse": "उपयोग के शर्तों",
+            "privacyPolicy": "प्राइवेसी नीति",
+            "copyrightPolicy": "कॉपीराइट नीति",
+            "followUs": "हमें फॉलो करें",
+            "copyright": "© LOGO. सभी अधिकार स שמורות"
+        },
+        "app": {
+            "popularSeries": "लोकप्रिय सीरीज़",
+            "latestMovies": "नवीनतम फिल्में",
+            "popularCelebrities": "लोकप्रिय सेलिब्रिटी"
+        }
+    },
+    "kh": {
+        "navbar": {
+            "foryou": "សម្រាប់អ្នក",
+            "drama": "ភាពយន្ត",
+            "movie": "ភាពយន្ត",
+            "variety": "ជម្រើស",
+            "animation": "អានិមេសន៍",
+            "search": "ស្វែងរក",
+            "download": "ចុះផ្សាយ",
+            "bell": "បំពiezឹង",
+            "vip": "VIP",
+            "try": "ព្យាករ"
+        },
+        "heroSection": {
+            "play": "លេង",
+            "add": "បន្ថែម"
+        },
+        "contentRow": {
+            "viewAll": "មើលទាំងអស់"
+        },
+        "detailView": {
+            "episodes": "រឿងភាពយន្ត",
+            "comments": "សំណួរ",
+            "recommendations": "សិស្សិត",
+            "topRated": "ច្រើនបំផុត",
+            "description": "ពិពណ៌នា",
+            "director": "អ្នកឯកសារ",
+            "starring": "ប្រឹក្សា"
+        },
+        "videoPlayerPage": {
+            "like": "ចូលចិត្ត",
+            "reply": "ឆ្លើយតប",
+            "share": "ចែកចាយ",
+            "downloadApp": "ទាញយក V9.4.0 ប្រកាស",
+            "watchOnTV": "មើលលើទីវី",
+            "getAppExperience": "ទទួលបានប្រតិបត្តិការល្អបំផុតលើកម្មវិធី",
+            "computer": "កុំព្យូទ័រ",
+            "phone": "ទូរស័ព្ទ",
+            "tv": "ទីវី",
+            "web": "ទំព័រ"
+        },
+        "popularCelebrities": {
+            "viewAll": "មើលទាំងអស់"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "បិទចូលលើ Whatsapp",
+            "telegram": "បិទចូលលើ Telegram"
+        },
+        "footer": {
+            "company": "ក្រុមហ៊ុន",
+            "about": "អំពី LOGO",
+            "careers": "គោលនយោបាយ",
+            "businessCooperation": "ការសហប្រឹក្សានីតិប្រតិបត្តិ",
+            "helpSupport": "ជូនដឹកនាំ និង អ្នកគាំទ្វាប្រទេស",
+            "contactUs": "ទំនាក់ទំនងយើង",
+            "faqs": "សួរច្នៃទីពី",
+            "deviceSupport": "គាំទ្វាប្រទេស",
+            "termsOfService": "ទ្រឹស្ដីសេវាកម្ម",
+            "termsOfUse": "ទ្រឹស្ដីប្រើប្រាស់",
+            "privacyPolicy": "ច្បាប់គូសុវត្ថិភាព",
+            "copyrightPolicy": "ច្បាប់សិទ្ធិភាព",
+            "followUs": "តាមយើង",
+            "copyright": "© LOGO. ទាំងអស់សិទ្ធិត្រូវបានរក្សាសិទ្ធិ។"
+        },
+        "app": {
+            "popularSeries": "ស៊ឺរីល្បឹង",
+            "latestMovies": "ភាពយន្តថ្មីៗ",
+            "popularCelebrities": "ស្តារល្បឹង"
+        }
+    },
+    "bn": {
+        "navbar": {
+            "foryou": "আপনার জন্য",
+            "drama": "ড্রামা",
+            "movie": "চলচ্চিত্র",
+            "variety": "বৈচিত্র্য",
+            "animation": "অ্যানিমেশন",
+            "search": "অনুসন্ধান",
+            "download": "ডাউনলোড",
+            "bell": "নোটিফিকেশন",
+            "vip": "ভিআইপি",
+            "try": "চেষ্টা করুন"
+        },
+        "heroSection": {
+            "play": "প্লে",
+            "add": "এড"
+        },
+        "contentRow": {
+            "viewAll": "সব দেখুন"
+        },
+        "detailView": {
+            "episodes": "এপিসোড",
+            "comments": "কমেন্ট",
+            "recommendations": "সুপারিশ",
+            "topRated": "শীর্ষ রেটেড",
+            "description": "ব述",
+            "director": "পরিচালক",
+            "starring": "অভিনেতা"
+        },
+        "videoPlayerPage": {
+            "like": "লাইক",
+            "reply": "রিপ্লাই",
+            "share": "শেয়ার",
+            "downloadApp": "ডাউনলোড করুন V9.4.0 এ্যাপ",
+            "watchOnTV": "টিভিতে দেখুন",
+            "getAppExperience": "এ্যাপে সেরা অভিজ্ঞতা পেয়ে",
+            "computer": "কম্পিউটার",
+            "phone": "ফোন",
+            "tv": "টিভি",
+            "web": "ওয়েব"
+        },
+        "popularCelebrities": {
+            "viewAll": "সব দেখুন"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "ওয়াটসঅ্যাপে আমাদের সঙ্গে যোগা",
+            "telegram": "টেলিগ্রামে আমাদের সঙ্গে যোগা"
+        },
+        "footer": {
+            "company": "কোম্পানি",
+            "about": "এ্যাপের সম্পর্কে",
+            "careers": "কর্মসংস্থান",
+            "businessCooperation": "ব্যবসা সম্প্রীতি",
+            "helpSupport": "সাহায্য ও সমর্থন",
+            "contactUs": "আমাদের সঙ্গে যোগাযোগ করুন",
+            "faqs": "সাধারণ প্রশ্ন ও উত্তর",
+            "deviceSupport": "ডিভাইস সমর্থন",
+            "termsOfService": "সেবা শর্তাবলী",
+            "termsOfUse": "ব্যবহারের শর্তাবলী",
+            "privacyPolicy": "প্রাইভেসি নীতি",
+            "copyrightPolicy": "কপিরাইট নীতি",
+            "followUs": "আমাদের অনুসরণ করুন",
+            "copyright": "© LOGO. সকল অধিকার সংরক্ষিত"
+        },
+        "app": {
+            "popularSeries": "জনপ্রিয় সিরিজ",
+            "latestMovies": "নবীন চলচ্চিত্র",
+            "popularCelebrities": "জনপ্রিয় সেলিব্রিটি"
+        }
+    },
+    "vn": {
+        "navbar": {
+            "foryou": "Dành Cho Bạn",
+            "drama": "Phim Bộ",
+            "movie": "Phim",
+            "variety": "Giải Trí",
+            "animation": "Hoạt Hình",
+            "search": "Tìm Kiếm",
+            "download": "Tải Xuống",
+            "bell": "Thông Báo",
+            "vip": "VIP",
+            "try": "Thử"
+        },
+        "heroSection": {
+            "play": "Phát",
+            "add": "Thêm"
+        },
+        "contentRow": {
+            "viewAll": "Xem Tất Cả"
+        },
+        "detailView": {
+            "episodes": "Tập",
+            "comments": "Bình Luận",
+            "recommendations": "Khuyến Nghị",
+            "topRated": "Đánh Giá Cao Nhất",
+            "description": "Mô Tả",
+            "director": "Đạo Diễn",
+            "starring": "Diễn Viên Chính"
+        },
+        "videoPlayerPage": {
+            "like": "Thích",
+            "reply": "Trả Lời",
+            "share": "Chia Sẻ",
+            "downloadApp": "Tải Xuống ứng dụng V9.4.0",
+            "watchOnTV": "Xem trên TV",
+            "getAppExperience": "Trải Nghiệm Tuyệt Vời trên ứng dụng",
+            "computer": "Máy Tính",
+            "phone": "Điện Thoại",
+            "tv": "TV",
+            "web": "Trang Web"
+        },
+        "popularCelebrities": {
+            "viewAll": "Xem Tất Cả"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "Tham Gia Trên Whatsapp",
+            "telegram": "Tham Gia Trên Telegram"
+        },
+        "footer": {
+            "company": "Công Ty",
+            "about": "Giới Thiệu",
+            "careers": "Cơ Hội Nghề Nghiệp",
+            "businessCooperation": "Hợp Tác Kinh Doanh",
+            "helpSupport": "Trợ Giúp & Hỗ Trợ",
+            "contactUs": "Liên Hệ",
+            "faqs": "Câu Hỏi Thường Gặp",
+            "deviceSupport": "Hỗ trợ Thiết Bị",
+            "termsOfService": "Điều Khoản Dịch Vụ",
+            "termsOfUse": "Điều Khoản Sử Dụng",
+            "privacyPolicy": "Chính Sách Bảo Mật",
+            "copyrightPolicy": "Chính Sách Bản Quyền",
+            "followUs": "Theo Dõi Chúng Tôi",
+            "copyright": "© LOGO. Bảo Lưu Mọi Quyền"
+        },
+        "app": {
+            "popularSeries": "Danh Sách Phim Hót",
+            "latestMovies": "Phim Mới Nhất",
+            "popularCelebrities": "Sao Hót"
+        }
+    },
+    "fr": {
+        "navbar": {
+            "foryou": "Pour Vous",
+            "drama": "Drame",
+            "movie": "Film",
+            "variety": "Variété",
+            "animation": "Animation",
+            "search": "Recherche",
+            "download": "Télécharger",
+            "bell": "Notification",
+            "vip": "VIP",
+            "try": "Essai"
+        },
+        "heroSection": {
+            "play": "Lecture",
+            "add": "Ajouter"
+        },
+        "contentRow": {
+            "viewAll": "Afficher Tout"
+        },
+        "detailView": {
+            "episodes": "Épisodes",
+            "comments": "Commentaires",
+            "recommendations": "Recommandations",
+            "topRated": "Meilleures Notes",
+            "description": "Description",
+            "director": "Réalisateur",
+            "starring": "Avec"
+        },
+        "videoPlayerPage": {
+            "like": "Aimer",
+            "reply": "Répondre",
+            "share": "Partager",
+            "downloadApp": "Télécharger Application V9.4.0",
+            "watchOnTV": "Regarder sur TV",
+            "getAppExperience": "Obtenir la Meilleure Expérience sur l'Application",
+            "computer": "Ordinateur",
+            "phone": "Téléphone",
+            "tv": "TV",
+            "web": "Web"
+        },
+        "popularCelebrities": {
+            "viewAll": "Afficher Tout"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "Rejoignez-nous sur Whatsapp",
+            "telegram": "Rejoignez-nous sur Telegram"
+        },
+        "footer": {
+            "company": "Entreprise",
+            "about": "À propos de LOGO",
+            "careers": "Carrières",
+            "businessCooperation": "Coopération d'affaires",
+            "helpSupport": "Aide et Support",
+            "contactUs": "Contactez-nous",
+            "faqs": "FAQ",
+            "deviceSupport": "Support des appareils",
+            "termsOfService": "Conditions de service",
+            "termsOfUse": "Conditions d'utilisation",
+            "privacyPolicy": "Politique de confidentialité",
+            "copyrightPolicy": "Politique de droits d'auteur",
+            "followUs": "Suivez-nous",
+            "copyright": "© LOGO. Tous droits réservés."
+        },
+        "app": {
+            "popularSeries": "Séries populaires",
+            "latestMovies": "Derniers films",
+            "popularCelebrities": "Célébrités populaires"
+        }
+    },
+    "kr": {
+        "navbar": {
+            "foryou": "귀하를 위한",
+            "drama": "드라마",
+            "movie": "영화",
+            "variety": "綜藝",
+            "animation": "애니메이션",
+            "search": "검색",
+            "download": "다운로드",
+            "bell": "알림",
+            "vip": "VIP",
+            "try": "시도"
+        },
+        "heroSection": {
+            "play": "재생",
+            "add": "추가"
+        },
+        "contentRow": {
+            "viewAll": "전체보기"
+        },
+        "detailView": {
+            "episodes": "에피소드",
+            "comments": "댓글",
+            "recommendations": "추천",
+            "topRated": " 최고 평가",
+            "description": "소개",
+            "director": "감독",
+            "starring": "주연"
+        },
+        "videoPlayerPage": {
+            "like": "좋아요",
+            "reply": "답글",
+            "share": "공유",
+            "downloadApp": "V9.4.0 앱 다운로드",
+            "watchOnTV": "TV에서 시청",
+            "getAppExperience": "앱에서 최고의 경험을",
+            "computer": "컴퓨터",
+            "phone": "전화",
+            "tv": "TV",
+            "web": "웹"
+        },
+        "popularCelebrities": {
+            "viewAll": "전체보기"
+        },
+        "thirdPartyJoin": {
+            "whatsapp": "와트ساب에 우리를 가입하세요",
+            "telegram": "텔레그램에 우리를 가입하세요"
+        },
+        "footer": {
+            "company": "회사",
+            "about": "LOGO 소개",
+            "careers": "채용정보",
+            "businessCooperation": "비즈니스협력",
+            "helpSupport": "도움 및 지원",
+            "contactUs": "연락처",
+            "faqs": "자주 묻는 질문",
+            "deviceSupport": "장치 지원",
+            "termsOfService": "서비스 이용약관",
+            "termsOfUse": "이용약관",
+            "privacyPolicy": "개인정보 보호정책",
+            "copyrightPolicy": "저작권정책",
+            "followUs": "팔로우 하세요",
+            "copyright": "© LOGO. 모든 권리 보유."
+        },
+        "app": {
+            "popularSeries": "인기 시리즈",
+            "latestMovies": "최신 영화",
+            "popularCelebrities": "인기 스타"
+        }
+    }
+}
